@@ -1,12 +1,12 @@
 # CellularAutonomy
 Game of Life project and custom Forest Fire simulator based on cellular automata principles.
-The Phenomenon:
+##The Phenomenon:
 This automoton models forest fires in nature as a result of lightning, and how rain significantly hinders the rate at which fire spreads. Specifically, the rate of propagation for a wildfire through a thick forest was captured in this model. The colour of the fire changes based on its intensity. White is the highest intensity and is supposed to model very hot fire. Red is the lowest intensity flame. The colours of the trees vary as if some were taller than others and thus the trees reflect more sunlight. This is represented as varying shades of green in the initial state. As the trees burn, they become darker as if they were scorched. The trees only have a finite amount of wood to burn and after burning for an amount of time, they have no more fuel to allow combustion to continue. This is represented as black. The simulation will run until there is not enough fire to spread and not enough wood to burn. Black is chosen because it is the colour  of the carbon that exists after the tree is finished combustion. According to information published by Canadian Geographic Magazine, there are 65 forest fires daily in Canada during peak season and 42% of them are caused by lightning. To demonstrate, I randomly generated sparks to simulate lightning strikes.
 
-Possible States for a tree:
+##Possible States for a tree:
 Trees are described with two integer arrays. The first array called treeValue and has 5 possible integer values from 0 to 4. This integer value describes flame intensity, with 4 being the most intense and 0 being no flames. Any tree 0 is not burning and any tree with an integer value between 1 and 4 is burning. Any non burning tree can have two states: dead and alive. A non burning tree is dead if it does not have any wood left to burn, represented by the second integer array called "forest". For each iteration, if a tree is burning, the tree's strength decreases by 1, and is stored in the forest array. When the tree's strength reaches 0, it cannot burn any further. 
 
-The Rules:
+##The Rules:
 Take the sum of the 8 surrounding tree values and store the value in an array at (i,j).
 1. If the tree is burning, the tree will stop burning if the sum is less than 3 (Not enough heat to ignite surrounding area) or greater than 6 (lack of oxygen)
 2. If the tree is burning, assign it the value of the sum - 2, as if to simulate flame intensity.
@@ -14,5 +14,5 @@ Take the sum of the 8 surrounding tree values and store the value in an array at
 4. If the tree is not burning, a sum of exactly 4 will cause ignition and assign a value of 1 to the tree, sum of 5 will assign value of 2.
 5. A tree can burn for a set number of iterations. Currently each tree is assigned a strength value of 40-60 and can burn for until its strength reaches zero, where the strength degrades for every iteration that it burns.
 
-Extension:
+##Extension:
 The storm pattern that runs by default generates random sources of fire, as if to simulate lightning strikes. The source of fire is always one tree set to a value of 4. A single 4 has a 5 frame pattern that it spawns before terminating. That is, a single spark is not enough to sprout a fire. It takes multiple sparks nearby to compound and start a growing fire. On average, one tree on screen will light on fire per iteration. Rain is also added into this simulation. Squares with rain have a value of -1, as to suppress fire around it. Square will randomly be rained on every iteration (on average 0.5% of squares). Rain will instantly extinguish fire on a given tile.
